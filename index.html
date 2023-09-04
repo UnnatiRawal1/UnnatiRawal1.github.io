@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<head>
+    <link rel="manifest" href="/manifest.json">
+    <title>Form</title>
+    <script src="https://kit.fontawesome.com/5e53675604.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
+    // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+        clevertap.account.push({"id": "658-5R8-WR6Z"});
+        clevertap.privacy.push({optOut: false}); //set the flag to true, if the user of the device opts out of sharing their data
+        clevertap.privacy.push({useIP: false}); //set the flag to true, if the user agrees to share their IP data
+            (function () {
+                    var wzrk = document.createElement('script');
+                    wzrk.type = 'text/javascript';
+                    wzrk.async = true;
+                    wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/clevertap.min.js';        
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(wzrk, s);
+            })();
+
+        function anything(){
+            let name=document.getElementById("name1").value;
+            let email=document.getElementById("email1").value;
+            let phone=document.getElementById("phone1").value;
+            let dob=document.getElementById("dob1").value;
+
+            clevertap.onUserLogin.push({
+                "Site": {
+                "Name": name,            // String
+                "Email": email,         // Email address of the user
+                "Phone": phone,           // Phone (with the country code)
+                "DOB": new Date(),                 // Date of Birth. Date object
+                // optional fields. controls whether the user will be sent email, push etc.
+                "MSG-email": true,                // Disable email notifications
+                "MSG-push": true,                  // Enable push notifications
+                "MSG-sms": true,                   // Enable sms notifications
+                "MSG-whatsapp": true,              // Enable WhatsApp notifications
+                }
+                })
+        }
+        function anythingyouwant(){
+            clevertap.event.push("Saurabh", {
+                "Product name":"Casio Chronograph Watch",
+                "Category":"Mens Accessories",
+                "Price":59.99,
+                "Date": new Date()
+                });
+
+            console.log("Done");
+        }
+        function anything1(){
+            clevertap.notifications.push({
+                "apnsWebPushId":"<apple web push id>", //only for safari browser
+                "apnsWebPushServiceUrl":"<safari package service url>",//only for safari browser
+                "titleText":'Would you like to receive Push Notifications?',
+                "bodyText":'We promise to only send you relevant content and give you updates on your transactions',
+                "okButtonText":'Sign me up!',
+                "rejectButtonText":'No thanks',
+                "okButtonColor":'#f28046'});
+        }
+    </script>
+    
+</head>
+<body onload="anything1()">
+    <marquee>This is a Login form</marquee>
+    <div class="container">
+        <div class="formBox">
+            <form>
+                <h1>Login</h1>
+                <i class="fa-solid fa-user"></i>
+                <input type="text" placeholder="Name" id="name1" ><br>
+
+                <i class="fa-solid fa-envelope"></i>
+                <input type="text" placeholder="E-mail" id="email1" ><br>
+
+                <i class="fa-solid fa-phone"></i>
+                <input type="tel" placeholder="Phone" id="phone1" ><br>
+
+                <label><b>DOB</b></label>
+                <input type="date" placeholder="Date of Birth" id="dob1" ><br>
+                <div class="clearfix">
+                    <button type="submit" onclick="anything()">Login</button><br>
+                    <button type="submit">Profile push</button><br>
+                    <button type="button" onclick="anythingyouwant()">Raise event</button><br>
+                    <button type="submit">PushNotification</button><br>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyDpdEStZUmd9gB5V5dGyBn1e4wubj6LprI",
+          authDomain: "unnati-c7f44.firebaseapp.com",
+          projectId: "unnati-c7f44",
+          storageBucket: "unnati-c7f44.appspot.com",
+          messagingSenderId: "644764219498",
+          appId: "1:644764219498:web:741880923bdf932f797213",
+          measurementId: "G-6BJZHR411R"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script>
+
+</body>
+</html>
